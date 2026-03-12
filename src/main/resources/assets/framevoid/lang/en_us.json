@@ -1,0 +1,12 @@
+{
+  "framevoid.title": "FrameVoid",
+  "framevoid.keybind.category": "FrameVoid",
+  "framevoid.keybind.toggle": "Toggle Borderless Fullscreen",
+  "framevoid.config.title": "FrameVoid Settings",
+  "framevoid.config.autoApply": "Auto-apply on launch",
+  "framevoid.config.autoApply.tooltip": "Automatically enter borderless fullscreen when the game starts.",
+  "framevoid.config.monitorIndex": "Target monitor index",
+  "framevoid.config.monitorIndex.tooltip": "0 = primary monitor. Increase for secondary monitors.",
+  "framevoid.config.done": "Done",
+  "key.categories.framevoid.general": "FrameVoid"
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "framevoid",
+  "version": "${version}",
+  "name": "FrameVoid",
+  "description": "Adds true borderless fullscreen window mode to Minecraft.",
+  "authors": [],
+  "contact": {
+    "sources": "https://github.com/your-username/framevoid"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.framevoid.FrameVoid"
+    ]
+  },
+  "mixins": [
+    "framevoid.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "26.1-pre.1",
+    "java": ">=25"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
