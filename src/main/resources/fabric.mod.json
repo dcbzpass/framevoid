@@ -4,12 +4,13 @@
   "version": "${version}",
   "name": "FrameVoid",
   "description": "Adds true borderless fullscreen window mode to Minecraft.",
-  "authors": [],
+  "authors": ["dcbzpass"],
   "contact": {
-    "sources": "https://github.com/your-username/framevoid"
+    "sources": "https://github.com/dcbzpass/framevoid"
   },
   "license": "MIT",
   "environment": "client",
+  "icon": "assets/framevoid/icon.png",
   "entrypoints": {
     "client": [
       "com.framevoid.FrameVoid"
