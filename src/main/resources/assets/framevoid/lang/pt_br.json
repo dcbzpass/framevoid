@@ -1,0 +1,12 @@
+{
+  "framevoid.title": "FrameVoid",
+  "framevoid.keybind.category": "FrameVoid",
+  "framevoid.keybind.toggle": "Alternar tela cheia sem bordas",
+  "framevoid.config.title": "Configurações do FrameVoid",
+  "framevoid.config.autoApply": "Aplicar automaticamente ao iniciar",
+  "framevoid.config.autoApply.tooltip": "Ativa automaticamente a tela cheia sem bordas ao iniciar o jogo.",
+  "framevoid.config.monitorIndex": "Índice do monitor alvo",
+  "framevoid.config.monitorIndex.tooltip": "0 = monitor principal. Aumentar para monitores secundários.",
+  "framevoid.config.done": "Concluído",
+  "key.categories.framevoid.general": "FrameVoid"
+}

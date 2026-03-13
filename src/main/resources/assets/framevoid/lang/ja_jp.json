@@ -1,0 +1,12 @@
+{
+  "framevoid.title": "FrameVoid",
+  "framevoid.keybind.category": "FrameVoid",
+  "framevoid.keybind.toggle": "ボーダーレスフルスクリーンの切り替え",
+  "framevoid.config.title": "FrameVoid 設定",
+  "framevoid.config.autoApply": "起動時に自動適用",
+  "framevoid.config.autoApply.tooltip": "ゲーム起動時に自動的にボーダーレスフルスクリーンを有効にします。",
+  "framevoid.config.monitorIndex": "対象モニターのインデックス",
+  "framevoid.config.monitorIndex.tooltip": "0 = メインモニター。サブモニターには数値を増やしてください。",
+  "framevoid.config.done": "完了",
+  "key.categories.framevoid.general": "FrameVoid"
+}

@@ -1,0 +1,12 @@
+{
+  "framevoid.title": "FrameVoid",
+  "framevoid.keybind.category": "FrameVoid",
+  "framevoid.keybind.toggle": "Basculer le plein écran sans bordure",
+  "framevoid.config.title": "Paramètres FrameVoid",
+  "framevoid.config.autoApply": "Appliquer automatiquement au lancement",
+  "framevoid.config.autoApply.tooltip": "Active automatiquement le plein écran sans bordure au démarrage du jeu.",
+  "framevoid.config.monitorIndex": "Index du moniteur cible",
+  "framevoid.config.monitorIndex.tooltip": "0 = moniteur principal. Augmenter pour les moniteurs secondaires.",
+  "framevoid.config.done": "Terminé",
+  "key.categories.framevoid.general": "FrameVoid"
+}
