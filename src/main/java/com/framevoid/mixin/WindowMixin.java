@@ -13,8 +13,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Window.class)
 public class WindowMixin {
 
+    @Inject(method = "setMode", at = @At("HEAD"))
+    private void onSetModeHead(CallbackInfo ci) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc == null) return;
+
+        boolean currentlyFullscreen = mc.getWindow().isFullscreen();
+        long handle = GLFW.glfwGetCurrentContext();
+
+        if (!currentlyFullscreen && !WindowManager.isBorderless()) {
+            WindowManager.saveState(handle);
+        }
+    }
+
     @Inject(method = "setMode", at = @At("TAIL"))
-    private void onSetMode(CallbackInfo ci) {
+    private void onSetModeTail(CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
         if (mc == null || mc.gui == null) return;
 
