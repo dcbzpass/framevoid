@@ -16,7 +16,7 @@ public class WindowMixin {
     @Inject(method = "setMode", at = @At("HEAD"))
     private void onSetModeHead(CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc == null) return;
+        if (mc == null || mc.getWindow() == null) return;
 
         boolean currentlyFullscreen = mc.getWindow().isFullscreen();
         long handle = GLFW.glfwGetCurrentContext();
