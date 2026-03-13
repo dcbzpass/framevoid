@@ -8,5 +8,7 @@
   "framevoid.config.monitorIndex": "Индекс целевого монитора",
   "framevoid.config.monitorIndex.tooltip": "0 = основной монитор. Увеличьте для дополнительных мониторов.",
   "framevoid.config.done": "Готово",
-  "key.categories.framevoid.general": "FrameVoid"
+  "key.categories.framevoid.general": "FrameVoid",
+  "framevoid.status.on": "Безрамочный режим: ВКЛ",
+  "framevoid.status.off": "Безрамочный режим: ВЫКЛ"
 }

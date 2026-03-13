@@ -8,5 +8,7 @@
   "framevoid.config.monitorIndex": "Zielmonitor-Index",
   "framevoid.config.monitorIndex.tooltip": "0 = Primärmonitor. Erhöhen für Sekundärmonitore.",
   "framevoid.config.done": "Fertig",
-  "key.categories.framevoid.general": "FrameVoid"
+  "key.categories.framevoid.general": "FrameVoid",
+  "framevoid.status.on": "Rahmenloser Vollbildmodus: AN",
+  "framevoid.status.off": "Rahmenloser Vollbildmodus: AUS"
 }

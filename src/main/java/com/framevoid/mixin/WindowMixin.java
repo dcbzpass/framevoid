@@ -23,10 +23,10 @@ public class WindowMixin {
 
         if (nowFullscreen && !WindowManager.isBorderless()) {
             WindowManager.applyBorderless(handle);
-            mc.gui.setOverlayMessage(Component.literal("Borderless Fullscreen: ON"), false);
+            mc.gui.setOverlayMessage(Component.translatable("framevoid.status.on"), false);
         } else if (!nowFullscreen && WindowManager.isBorderless()) {
             WindowManager.restoreWindow(handle);
-            mc.gui.setOverlayMessage(Component.literal("Borderless Fullscreen: OFF"), false);
+            mc.gui.setOverlayMessage(Component.translatable("framevoid.status.off"), false);
         }
     }
 }

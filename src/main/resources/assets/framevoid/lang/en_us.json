@@ -8,5 +8,7 @@
   "framevoid.config.monitorIndex": "Target monitor index",
   "framevoid.config.monitorIndex.tooltip": "0 = primary monitor. Increase for secondary monitors.",
   "framevoid.config.done": "Done",
-  "key.categories.framevoid.general": "FrameVoid"
+  "key.categories.framevoid.general": "FrameVoid",
+  "framevoid.status.on": "Borderless Fullscreen: ON",
+  "framevoid.status.off": "Borderless Fullscreen: OFF"
 }

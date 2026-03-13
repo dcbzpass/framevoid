@@ -8,5 +8,7 @@
   "framevoid.config.monitorIndex": "対象モニターのインデックス",
   "framevoid.config.monitorIndex.tooltip": "0 = メインモニター。サブモニターには数値を増やしてください。",
   "framevoid.config.done": "完了",
-  "key.categories.framevoid.general": "FrameVoid"
+  "key.categories.framevoid.general": "FrameVoid",
+  "framevoid.status.on": "ボーダーレスフルスクリーン: オン",
+  "framevoid.status.off": "ボーダーレスフルスクリーン: オフ"
 }

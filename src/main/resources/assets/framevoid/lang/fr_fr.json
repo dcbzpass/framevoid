@@ -8,5 +8,7 @@
   "framevoid.config.monitorIndex": "Index du moniteur cible",
   "framevoid.config.monitorIndex.tooltip": "0 = moniteur principal. Augmenter pour les moniteurs secondaires.",
   "framevoid.config.done": "Terminé",
-  "key.categories.framevoid.general": "FrameVoid"
+  "key.categories.framevoid.general": "FrameVoid",
+  "framevoid.status.on": "Plein écran sans bordure : ACTIVÉ",
+  "framevoid.status.off": "Plein écran sans bordure : DÉSACTIVÉ"
 }

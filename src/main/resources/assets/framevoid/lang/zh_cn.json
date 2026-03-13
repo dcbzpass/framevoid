@@ -8,5 +8,7 @@
   "framevoid.config.monitorIndex": "目标显示器索引",
   "framevoid.config.monitorIndex.tooltip": "0 = 主显示器。增大以选择副显示器。",
   "framevoid.config.done": "完成",
-  "key.categories.framevoid.general": "FrameVoid"
+  "key.categories.framevoid.general": "FrameVoid",
+  "framevoid.status.on": "无边框全屏：已开启",
+  "framevoid.status.off": "无边框全屏：已关闭"
 }

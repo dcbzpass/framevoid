@@ -1,7 +1,10 @@
 package com.framevoid;
 
 import com.framevoid.config.FrameVoidConfig;
+import com.framevoid.window.WindowManager;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import org.lwjgl.glfw.GLFW;
 
 public class FrameVoid implements ClientModInitializer {
 
@@ -10,5 +13,12 @@ public class FrameVoid implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FrameVoidConfig.getInstance();
+
+        ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
+            if (FrameVoidConfig.getInstance().isAutoApply()) {
+                long handle = GLFW.glfwGetCurrentContext();
+                WindowManager.applyBorderless(handle);
+            }
+        });
     }
 }
