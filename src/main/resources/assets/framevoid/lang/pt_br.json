@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "Alternar tela cheia sem bordas",
+  "framevoid.status.on": "Tela cheia sem bordas ativada",
+  "framevoid.status.off": "Tela cheia sem bordas desativada",
   "framevoid.config.title": "Configurações do FrameVoid",
   "framevoid.config.autoApply": "Aplicar automaticamente ao iniciar",
   "framevoid.config.autoApply.tooltip": "Ativa automaticamente a tela cheia sem bordas ao iniciar o jogo.",
-  "framevoid.config.monitorIndex": "Índice do monitor alvo",
-  "framevoid.config.monitorIndex.tooltip": "0 = monitor principal. Aumentar para monitores secundários.",
-  "framevoid.config.done": "Concluído",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "Tela cheia sem bordas: ATIVADA",
-  "framevoid.status.off": "Tela cheia sem bordas: DESATIVADA"
+  "framevoid.config.monitorIndex": "Monitor",
+  "framevoid.config.monitorIndex.tooltip": "Qual monitor usar para a tela cheia sem bordas. Alterna entre todos os monitores conectados.",
+  "framevoid.config.apply": "Aplicar sem bordas",
+  "framevoid.config.restore": "Restaurar janela"
 }

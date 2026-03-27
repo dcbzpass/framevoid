@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "Переключить безрамочный полноэкранный режим",
+  "framevoid.status.on": "Безрамочный полноэкранный режим включён",
+  "framevoid.status.off": "Безрамочный полноэкранный режим отключён",
   "framevoid.config.title": "Настройки FrameVoid",
   "framevoid.config.autoApply": "Применять автоматически при запуске",
   "framevoid.config.autoApply.tooltip": "Автоматически включает безрамочный полноэкранный режим при запуске игры.",
-  "framevoid.config.monitorIndex": "Индекс целевого монитора",
-  "framevoid.config.monitorIndex.tooltip": "0 = основной монитор. Увеличьте для дополнительных мониторов.",
-  "framevoid.config.done": "Готово",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "Безрамочный режим: ВКЛ",
-  "framevoid.status.off": "Безрамочный режим: ВЫКЛ"
+  "framevoid.config.monitorIndex": "Монитор",
+  "framevoid.config.monitorIndex.tooltip": "Монитор для безрамочного полноэкранного режима. Перебирает все подключённые мониторы.",
+  "framevoid.config.apply": "Применить безрамочный режим",
+  "framevoid.config.restore": "Восстановить окно"
 }

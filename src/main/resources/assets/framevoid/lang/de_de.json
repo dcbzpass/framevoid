@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "Rahmenlosen Vollbildmodus umschalten",
+  "framevoid.status.on": "Rahmenloser Vollbildmodus aktiviert",
+  "framevoid.status.off": "Rahmenloser Vollbildmodus deaktiviert",
   "framevoid.config.title": "FrameVoid Einstellungen",
   "framevoid.config.autoApply": "Beim Start automatisch anwenden",
   "framevoid.config.autoApply.tooltip": "Aktiviert automatisch den rahmenlosen Vollbildmodus beim Spielstart.",
-  "framevoid.config.monitorIndex": "Zielmonitor-Index",
-  "framevoid.config.monitorIndex.tooltip": "0 = Primärmonitor. Erhöhen für Sekundärmonitore.",
-  "framevoid.config.done": "Fertig",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "Rahmenloser Vollbildmodus: AN",
-  "framevoid.status.off": "Rahmenloser Vollbildmodus: AUS"
+  "framevoid.config.monitorIndex": "Monitor",
+  "framevoid.config.monitorIndex.tooltip": "Welcher Monitor für den rahmenlosen Vollbildmodus verwendet wird. Wechselt alle angeschlossenen Monitore durch.",
+  "framevoid.config.apply": "Rahmenlos anwenden",
+  "framevoid.config.restore": "Fenster wiederherstellen"
 }

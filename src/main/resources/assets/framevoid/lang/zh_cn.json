@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "切换无边框全屏",
+  "framevoid.status.on": "无边框全屏已启用",
+  "framevoid.status.off": "无边框全屏已禁用",
   "framevoid.config.title": "FrameVoid 设置",
   "framevoid.config.autoApply": "启动时自动应用",
   "framevoid.config.autoApply.tooltip": "游戏启动时自动进入无边框全屏模式。",
-  "framevoid.config.monitorIndex": "目标显示器索引",
-  "framevoid.config.monitorIndex.tooltip": "0 = 主显示器。增大以选择副显示器。",
-  "framevoid.config.done": "完成",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "无边框全屏：已开启",
-  "framevoid.status.off": "无边框全屏：已关闭"
+  "framevoid.config.monitorIndex": "显示器",
+  "framevoid.config.monitorIndex.tooltip": "用于无边框全屏的显示器。循环切换所有已连接的显示器。",
+  "framevoid.config.apply": "应用无边框",
+  "framevoid.config.restore": "还原窗口"
 }

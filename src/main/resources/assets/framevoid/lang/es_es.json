@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "Alternar pantalla completa sin bordes",
+  "framevoid.status.on": "Pantalla completa sin bordes activada",
+  "framevoid.status.off": "Pantalla completa sin bordes desactivada",
   "framevoid.config.title": "Ajustes de FrameVoid",
   "framevoid.config.autoApply": "Aplicar automáticamente al iniciar",
   "framevoid.config.autoApply.tooltip": "Activa automáticamente la pantalla completa sin bordes al iniciar el juego.",
-  "framevoid.config.monitorIndex": "Índice del monitor objetivo",
-  "framevoid.config.monitorIndex.tooltip": "0 = monitor principal. Aumentar para monitores secundarios.",
-  "framevoid.config.done": "Hecho",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "Pantalla completa sin bordes: ACTIVADA",
-  "framevoid.status.off": "Pantalla completa sin bordes: DESACTIVADA"
+  "framevoid.config.monitorIndex": "Monitor",
+  "framevoid.config.monitorIndex.tooltip": "Qué monitor usar para la pantalla completa sin bordes. Recorre todos los monitores conectados.",
+  "framevoid.config.apply": "Aplicar sin bordes",
+  "framevoid.config.restore": "Restaurar ventana"
 }

@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "Basculer le plein écran sans bordure",
+  "framevoid.status.on": "Plein écran sans bordure activé",
+  "framevoid.status.off": "Plein écran sans bordure désactivé",
   "framevoid.config.title": "Paramètres FrameVoid",
   "framevoid.config.autoApply": "Appliquer automatiquement au lancement",
   "framevoid.config.autoApply.tooltip": "Active automatiquement le plein écran sans bordure au démarrage du jeu.",
-  "framevoid.config.monitorIndex": "Index du moniteur cible",
-  "framevoid.config.monitorIndex.tooltip": "0 = moniteur principal. Augmenter pour les moniteurs secondaires.",
-  "framevoid.config.done": "Terminé",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "Plein écran sans bordure : ACTIVÉ",
-  "framevoid.status.off": "Plein écran sans bordure : DÉSACTIVÉ"
+  "framevoid.config.monitorIndex": "Moniteur",
+  "framevoid.config.monitorIndex.tooltip": "Le moniteur à utiliser pour le plein écran sans bordure. Parcourt tous les moniteurs connectés.",
+  "framevoid.config.apply": "Appliquer sans bordure",
+  "framevoid.config.restore": "Restaurer la fenêtre"
 }

@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "Toggle Borderless Fullscreen",
+  "framevoid.status.on": "Borderless fullscreen enabled",
+  "framevoid.status.off": "Borderless fullscreen disabled",
   "framevoid.config.title": "FrameVoid Settings",
-  "framevoid.config.autoApply": "Auto-apply on launch",
-  "framevoid.config.autoApply.tooltip": "Automatically enter borderless fullscreen when the game starts.",
-  "framevoid.config.monitorIndex": "Target monitor index",
-  "framevoid.config.monitorIndex.tooltip": "0 = primary monitor. Increase for secondary monitors.",
-  "framevoid.config.done": "Done",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "Borderless Fullscreen: ON",
-  "framevoid.status.off": "Borderless Fullscreen: OFF"
+  "framevoid.config.autoApply": "Auto-apply on startup",
+  "framevoid.config.autoApply.tooltip": "Automatically apply borderless fullscreen when the game launches.",
+  "framevoid.config.monitorIndex": "Monitor",
+  "framevoid.config.monitorIndex.tooltip": "Which monitor to use for borderless fullscreen. Cycles through all connected monitors.",
+  "framevoid.config.apply": "Apply Borderless",
+  "framevoid.config.restore": "Restore Window"
 }

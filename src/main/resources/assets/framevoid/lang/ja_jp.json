@@ -1,14 +1,11 @@
 {
-  "framevoid.title": "FrameVoid",
-  "framevoid.keybind.category": "FrameVoid",
-  "framevoid.keybind.toggle": "ボーダーレスフルスクリーンの切り替え",
+  "framevoid.status.on": "ボーダーレスフルスクリーン: 有効",
+  "framevoid.status.off": "ボーダーレスフルスクリーン: 無効",
   "framevoid.config.title": "FrameVoid 設定",
   "framevoid.config.autoApply": "起動時に自動適用",
   "framevoid.config.autoApply.tooltip": "ゲーム起動時に自動的にボーダーレスフルスクリーンを有効にします。",
-  "framevoid.config.monitorIndex": "対象モニターのインデックス",
-  "framevoid.config.monitorIndex.tooltip": "0 = メインモニター。サブモニターには数値を増やしてください。",
-  "framevoid.config.done": "完了",
-  "key.categories.framevoid.general": "FrameVoid",
-  "framevoid.status.on": "ボーダーレスフルスクリーン: オン",
-  "framevoid.status.off": "ボーダーレスフルスクリーン: オフ"
+  "framevoid.config.monitorIndex": "モニター",
+  "framevoid.config.monitorIndex.tooltip": "ボーダーレスフルスクリーンに使用するモニター。接続されているすべてのモニターを順番に切り替えます。",
+  "framevoid.config.apply": "ボーダーレスを適用",
+  "framevoid.config.restore": "ウィンドウを復元"
 }
