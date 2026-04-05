@@ -53,7 +53,7 @@ public class MonitorDetector {
         if (monitorIndex >= 0 && monitorIndex < names.size()) {
             return names.get(monitorIndex);
         }
-        return fallbackName(monitorIndex);
+        return glfwFallbackName(monitorIndex);
     }
 
     private static List<String> resolveMonitorNames() {
@@ -63,50 +63,81 @@ public class MonitorDetector {
         cachedMonitorNames = new ArrayList<>();
 
         if (System.getProperty("os.name", "").toLowerCase().contains("win")) {
-            cachedMonitorNames = queryWmiMonitorNames();
+            cachedMonitorNames = readWindowsDisplayNames();
         }
 
         if (cachedMonitorNames.isEmpty()) {
             int count = getMonitorCount();
             for (int i = 0; i < count; i++) {
-                cachedMonitorNames.add(fallbackName(i));
+                cachedMonitorNames.add(glfwFallbackName(i));
             }
         }
 
         return cachedMonitorNames;
     }
 
-    private static List<String> queryWmiMonitorNames() {
+    /**
+     * Reads monitor friendly names from the Windows registry.
+     * HKLM\SYSTEM\CurrentControlSet\Enum\DISPLAY has one subkey per connected monitor.
+     * Each subkey's FriendlyName value is the human-readable name shown in Device Manager.
+     */
+    private static List<String> readWindowsDisplayNames() {
         List<String> names = new ArrayList<>();
         try {
-            ProcessBuilder pb = new ProcessBuilder(
-                    "powershell", "-NoProfile", "-NonInteractive", "-Command",
-                    "Get-WmiObject -Namespace root\\wmi -Class WmiMonitorID | ForEach-Object { " +
-                            "  $n = ($_.UserFriendlyName | Where-Object {$_ -ne 0} | ForEach-Object {[char]$_}) -join ''; " +
-                            "  if ($n) { $n } else { 'Display' }" +
-                            "}"
-            );
-            pb.redirectErrorStream(true);
-            Process process = pb.start();
+            // First, list immediate subkeys of DISPLAY — one per monitor model
+            Process listProc = new ProcessBuilder(
+                    "reg", "query",
+                    "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\DISPLAY"
+            ).redirectErrorStream(true).start();
 
+            List<String> subkeys = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream()))) {
+                    new InputStreamReader(listProc.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
-                    if (!line.isBlank()) {
-                        names.add(line);
+                    if (line.startsWith("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Enum\\DISPLAY\\")) {
+                        subkeys.add(line);
                     }
                 }
             }
-            process.waitFor();
+            listProc.waitFor();
+
+            // For each monitor subkey, query FriendlyName recursively
+            for (String subkey : subkeys) {
+                String regPath = subkey.replace("HKEY_LOCAL_MACHINE\\", "HKLM\\");
+                Process queryProc = new ProcessBuilder(
+                        "reg", "query", regPath, "/s", "/v", "FriendlyName"
+                ).redirectErrorStream(true).start();
+
+                String found = null;
+                try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(queryProc.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        line = line.trim();
+                        if (line.startsWith("FriendlyName") && line.contains("REG_SZ")) {
+                            String value = line.substring(line.lastIndexOf("REG_SZ") + 6).trim();
+                            if (!value.isBlank()) {
+                                found = value;
+                                break;
+                            }
+                        }
+                    }
+                }
+                queryProc.waitFor();
+
+                if (found != null) {
+                    names.add(found);
+                }
+            }
         } catch (Exception e) {
-            // fall through, caller will use GLFW fallback
+            // fall through to GLFW fallback
         }
         return names;
     }
 
-    private static String fallbackName(int monitorIndex) {
+    private static String glfwFallbackName(int monitorIndex) {
         PointerBuffer monitors = GLFW.glfwGetMonitors();
         if (monitors == null || monitors.limit() == 0) {
             return "Display " + monitorIndex;
