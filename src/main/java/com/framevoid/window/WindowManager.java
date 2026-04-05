@@ -17,7 +17,7 @@ public class WindowManager {
     }
 
     private static long getHandle() {
-        return org.lwjgl.glfw.GLFW.glfwGetCurrentContext();
+        return GLFW.glfwGetCurrentContext();
     }
 
     public static void saveState() {
@@ -44,8 +44,10 @@ public class WindowManager {
                 monitorPos[0], monitorPos[1],
                 resolution[0], resolution[1],
                 GLFW.GLFW_DONT_CARE);
+
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE);
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_AUTO_ICONIFY, GLFW.GLFW_FALSE);
+        GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_FLOATING, GLFW.GLFW_FALSE);
 
         borderless = true;
     }
@@ -63,8 +65,10 @@ public class WindowManager {
         int h = saved != null ? saved[3] : 720;
 
         GLFW.glfwSetWindowMonitor(handle, 0L, x, y, w, h, GLFW.GLFW_DONT_CARE);
+
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_DECORATED, GLFW.GLFW_TRUE);
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_AUTO_ICONIFY, GLFW.GLFW_TRUE);
+        GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_FLOATING, GLFW.GLFW_FALSE);
         GLFW.glfwFocusWindow(handle);
 
         borderless = false;
