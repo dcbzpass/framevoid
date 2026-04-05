@@ -25,8 +25,6 @@ public class WindowMixin {
 
     @Inject(method = "setMode", at = @At("TAIL"))
     private void onSetModeTail(CallbackInfo ci) {
-        if (WindowManager.consumeSuppressFlag()) return;
-
         Minecraft mc = Minecraft.getInstance();
         if (mc == null || mc.gui == null) return;
 

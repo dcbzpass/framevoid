@@ -11,18 +11,9 @@ public class WindowManager {
     private static boolean borderless = false;
     private static final Map<Integer, int[]> savedStatePerMonitor = new HashMap<>();
     private static int lastMonitorIndex = -1;
-    private static boolean suppressNextSetMode = false;
 
     public static boolean isBorderless() {
         return borderless;
-    }
-
-    public static boolean consumeSuppressFlag() {
-        if (suppressNextSetMode) {
-            suppressNextSetMode = false;
-            return true;
-        }
-        return false;
     }
 
     private static long getHandle() {
@@ -45,8 +36,6 @@ public class WindowManager {
         long handle = getHandle();
         if (handle == 0L) return;
 
-        suppressNextSetMode = true;
-
         int monitorIndex = FrameVoidConfig.getInstance().getMonitorIndex();
         int[] monitorPos = MonitorDetector.getMonitorPosition(monitorIndex);
         int[] resolution = MonitorDetector.getMonitorResolution(monitorIndex);
@@ -55,7 +44,6 @@ public class WindowManager {
                 monitorPos[0], monitorPos[1],
                 resolution[0], resolution[1],
                 GLFW.GLFW_DONT_CARE);
-
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE);
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_AUTO_ICONIFY, GLFW.GLFW_FALSE);
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_FLOATING, GLFW.GLFW_FALSE);
@@ -76,7 +64,6 @@ public class WindowManager {
         int h = saved != null ? saved[3] : 720;
 
         GLFW.glfwSetWindowMonitor(handle, 0L, x, y, w, h, GLFW.GLFW_DONT_CARE);
-
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_DECORATED, GLFW.GLFW_TRUE);
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_AUTO_ICONIFY, GLFW.GLFW_TRUE);
         GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_FLOATING, GLFW.GLFW_FALSE);

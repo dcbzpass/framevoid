@@ -63,7 +63,7 @@ public class MonitorDetector {
         cachedMonitorNames = new ArrayList<>();
 
         if (System.getProperty("os.name", "").toLowerCase().contains("win")) {
-            cachedMonitorNames = readWindowsDisplayNames();
+            cachedMonitorNames = readWindowsMonitorNames();
         }
 
         if (cachedMonitorNames.isEmpty()) {
@@ -76,65 +76,80 @@ public class MonitorDetector {
         return cachedMonitorNames;
     }
 
-    /**
-     * Reads monitor friendly names from the Windows registry.
-     * HKLM\SYSTEM\CurrentControlSet\Enum\DISPLAY has one subkey per connected monitor.
-     * Each subkey's FriendlyName value is the human-readable name shown in Device Manager.
-     */
-    private static List<String> readWindowsDisplayNames() {
+    private static List<String> readWindowsMonitorNames() {
         List<String> names = new ArrayList<>();
         try {
-            // First, list immediate subkeys of DISPLAY — one per monitor model
+            // List immediate subkeys of DISPLAY - each is one monitor device
             Process listProc = new ProcessBuilder(
                     "reg", "query",
                     "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\DISPLAY"
             ).redirectErrorStream(true).start();
 
-            List<String> subkeys = new ArrayList<>();
+            List<String> monitorSubkeys = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(
                     new InputStreamReader(listProc.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
                     if (line.startsWith("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Enum\\DISPLAY\\")) {
-                        subkeys.add(line);
+                        monitorSubkeys.add(line.replace("HKEY_LOCAL_MACHINE\\", "HKLM\\"));
                     }
                 }
             }
             listProc.waitFor();
 
-            // For each monitor subkey, query FriendlyName recursively
-            for (String subkey : subkeys) {
-                String regPath = subkey.replace("HKEY_LOCAL_MACHINE\\", "HKLM\\");
+            for (String subkey : monitorSubkeys) {
+                // Query FriendlyName one level deep under this monitor subkey
                 Process queryProc = new ProcessBuilder(
-                        "reg", "query", regPath, "/s", "/v", "FriendlyName"
+                        "reg", "query", subkey, "/s", "/v", "FriendlyName"
                 ).redirectErrorStream(true).start();
 
-                String found = null;
                 try (BufferedReader reader = new BufferedReader(
                         new InputStreamReader(queryProc.getInputStream()))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         line = line.trim();
                         if (line.startsWith("FriendlyName") && line.contains("REG_SZ")) {
-                            String value = line.substring(line.lastIndexOf("REG_SZ") + 6).trim();
-                            if (!value.isBlank()) {
-                                found = value;
+                            String raw = line.substring(line.lastIndexOf("REG_SZ") + 6).trim();
+                            String extracted = extractModelName(raw);
+                            if (extracted != null) {
+                                names.add(extracted);
                                 break;
                             }
                         }
                     }
                 }
                 queryProc.waitFor();
-
-                if (found != null) {
-                    names.add(found);
-                }
             }
         } catch (Exception e) {
             // fall through to GLFW fallback
         }
         return names;
+    }
+
+    /**
+     * The FriendlyName registry value looks like:
+     *   @System32\drivers\dxgkrnl.sys,#303;Generic Monitor (XF240Y X1)
+     * We want only the part inside the last parentheses: "XF240Y X1"
+     * If there are no parentheses, return the raw value as-is.
+     */
+    private static String extractModelName(String raw) {
+        if (raw == null || raw.isBlank()) return null;
+        int open = raw.lastIndexOf('(');
+        int close = raw.lastIndexOf(')');
+        if (open >= 0 && close > open) {
+            String model = raw.substring(open + 1, close).trim();
+            if (!model.isBlank()) {
+                return model;
+            }
+        }
+        // No parentheses — take everything after the last semicolon if present
+        int semi = raw.lastIndexOf(';');
+        if (semi >= 0) {
+            String after = raw.substring(semi + 1).trim();
+            if (!after.isBlank()) return after;
+        }
+        return raw.trim();
     }
 
     private static String glfwFallbackName(int monitorIndex) {
