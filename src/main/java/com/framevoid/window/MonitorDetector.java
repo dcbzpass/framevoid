@@ -47,6 +47,23 @@ public class MonitorDetector {
         return monitors.limit();
     }
 
+    public static String getMonitorName(int monitorIndex) {
+        PointerBuffer monitors = GLFW.glfwGetMonitors();
+        if (monitors == null || monitors.limit() == 0) {
+            return "Display " + monitorIndex;
+        }
+
+        int clampedIndex = Math.clamp(monitorIndex, 0, monitors.limit() - 1);
+        long monitor = monitors.get(clampedIndex);
+
+        String name = GLFW.glfwGetMonitorName(monitor);
+        if (name == null || name.isBlank()) {
+            return "Display " + monitorIndex;
+        }
+
+        return name;
+    }
+
     private static int[] getPrimaryMonitorResolution() {
         long primary = GLFW.glfwGetPrimaryMonitor();
         GLFWVidMode vidMode = GLFW.glfwGetVideoMode(primary);
