@@ -1,6 +1,5 @@
 package com.framevoid;
 
-import com.framevoid.config.FrameVoidConfig;
 import com.framevoid.window.WindowManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
@@ -12,16 +11,12 @@ public class FrameVoid implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        FrameVoidConfig.getInstance();
-
         ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
             long handle = GLFW.glfwGetCurrentContext();
             GLFW.glfwSetWindowPosCallback(handle, (win, x, y) -> WindowManager.updateSavedPos(x, y));
 
-            if (FrameVoidConfig.getInstance().isAutoApply()) {
-                WindowManager.saveState();
-                WindowManager.applyBorderless();
-            }
+            WindowManager.saveState();
+            WindowManager.applyBorderless();
         });
     }
 }
