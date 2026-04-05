@@ -11,9 +11,18 @@ public class WindowManager {
     private static boolean borderless = false;
     private static final Map<Integer, int[]> savedStatePerMonitor = new HashMap<>();
     private static int lastMonitorIndex = -1;
+    private static boolean suppressNextSetMode = false;
 
     public static boolean isBorderless() {
         return borderless;
+    }
+
+    public static boolean consumeSuppressFlag() {
+        if (suppressNextSetMode) {
+            suppressNextSetMode = false;
+            return true;
+        }
+        return false;
     }
 
     private static long getHandle() {
@@ -35,6 +44,8 @@ public class WindowManager {
     public static void applyBorderless() {
         long handle = getHandle();
         if (handle == 0L) return;
+
+        suppressNextSetMode = true;
 
         int monitorIndex = FrameVoidConfig.getInstance().getMonitorIndex();
         int[] monitorPos = MonitorDetector.getMonitorPosition(monitorIndex);

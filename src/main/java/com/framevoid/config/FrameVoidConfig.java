@@ -16,6 +16,7 @@ public class FrameVoidConfig {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("framevoid.json");
     private static FrameVoidConfig instance;
 
+    private boolean autoApply = false;
     private int monitorIndex = 0;
 
     public static FrameVoidConfig getInstance() {
@@ -48,6 +49,14 @@ public class FrameVoidConfig {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isAutoApply() {
+        return autoApply;
+    }
+
+    public void setAutoApply(boolean autoApply) {
+        this.autoApply = autoApply;
     }
 
     public int getMonitorIndex() {
