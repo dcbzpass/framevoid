@@ -19,6 +19,7 @@ public class FrameVoid implements ClientModInitializer {
             GLFW.glfwSetWindowPosCallback(handle, (win, x, y) -> WindowManager.updateSavedPos(x, y));
 
             if (FrameVoidConfig.getInstance().isAutoApply()) {
+                WindowManager.saveState();
                 WindowManager.applyBorderless();
             }
         });
