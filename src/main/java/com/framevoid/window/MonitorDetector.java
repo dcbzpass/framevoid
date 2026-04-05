@@ -18,15 +18,12 @@ public class MonitorDetector {
         if (monitors == null || monitors.limit() == 0) {
             return getPrimaryMonitorResolution();
         }
-
         int clampedIndex = Math.clamp(monitorIndex, 0, monitors.limit() - 1);
         long monitor = monitors.get(clampedIndex);
-
         GLFWVidMode vidMode = GLFW.glfwGetVideoMode(monitor);
         if (vidMode == null) {
             return getPrimaryMonitorResolution();
         }
-
         return new int[]{vidMode.width(), vidMode.height()};
     }
 
@@ -35,14 +32,11 @@ public class MonitorDetector {
         if (monitors == null || monitors.limit() == 0) {
             return new int[]{0, 0};
         }
-
         int clampedIndex = Math.clamp(monitorIndex, 0, monitors.limit() - 1);
         long monitor = monitors.get(clampedIndex);
-
         int[] posX = new int[1];
         int[] posY = new int[1];
         GLFW.glfwGetMonitorPos(monitor, posX, posY);
-
         return new int[]{posX[0], posY[0]};
     }
 
@@ -55,80 +49,64 @@ public class MonitorDetector {
     }
 
     public static String getMonitorName(int monitorIndex) {
-        List<String> names = getEdidMonitorNames();
+        List<String> names = resolveMonitorNames();
         if (monitorIndex >= 0 && monitorIndex < names.size()) {
             return names.get(monitorIndex);
         }
-        return glfwMonitorName(monitorIndex);
+        return fallbackName(monitorIndex);
     }
 
-    private static List<String> getEdidMonitorNames() {
+    private static List<String> resolveMonitorNames() {
         if (cachedMonitorNames != null) {
             return cachedMonitorNames;
         }
-
         cachedMonitorNames = new ArrayList<>();
 
-        String os = System.getProperty("os.name", "").toLowerCase();
-        if (os.contains("win")) {
-            cachedMonitorNames = queryWindowsMonitorNames();
+        if (System.getProperty("os.name", "").toLowerCase().contains("win")) {
+            cachedMonitorNames = queryWmiMonitorNames();
         }
 
         if (cachedMonitorNames.isEmpty()) {
             int count = getMonitorCount();
             for (int i = 0; i < count; i++) {
-                cachedMonitorNames.add(glfwMonitorName(i));
+                cachedMonitorNames.add(fallbackName(i));
             }
         }
 
         return cachedMonitorNames;
     }
 
-    private static List<String> queryWindowsMonitorNames() {
+    private static List<String> queryWmiMonitorNames() {
         List<String> names = new ArrayList<>();
         try {
-            Process process = new ProcessBuilder(
-                    "reg", "query",
-                    "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\DISPLAY",
-                    "/s", "/v", "DeviceDesc"
-            ).redirectErrorStream(true).start();
+            ProcessBuilder pb = new ProcessBuilder(
+                    "powershell", "-NoProfile", "-NonInteractive", "-Command",
+                    "Get-WmiObject -Namespace root\\wmi -Class WmiMonitorID | ForEach-Object { " +
+                            "  $n = ($_.UserFriendlyName | Where-Object {$_ -ne 0} | ForEach-Object {[char]$_}) -join ''; " +
+                            "  if ($n) { $n } else { 'Display' }" +
+                            "}"
+            );
+            pb.redirectErrorStream(true);
+            Process process = pb.start();
 
-            List<String> descs = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
-                    if (line.contains("DeviceDesc") && line.contains("REG_SZ")) {
-                        String value = line.substring(line.lastIndexOf("REG_SZ") + 6).trim();
-                        int parenOpen = value.lastIndexOf('(');
-                        int parenClose = value.lastIndexOf(')');
-                        if (parenOpen >= 0 && parenClose > parenOpen) {
-                            String model = value.substring(parenOpen + 1, parenClose).trim();
-                            if (!model.isBlank() && !descs.contains(model)) {
-                                descs.add(model);
-                            }
-                        }
+                    if (!line.isBlank()) {
+                        names.add(line);
                     }
                 }
             }
             process.waitFor();
-
-            int glfwCount = getMonitorCount();
-            for (int i = 0; i < glfwCount; i++) {
-                if (i < descs.size()) {
-                    names.add(descs.get(i));
-                } else {
-                    names.add(glfwMonitorName(i));
-                }
-            }
         } catch (Exception e) {
-            // fall through to GLFW names
+            // fall through, caller will use GLFW fallback
         }
         return names;
     }
 
-    private static String glfwMonitorName(int monitorIndex) {
+    private static String fallbackName(int monitorIndex) {
         PointerBuffer monitors = GLFW.glfwGetMonitors();
         if (monitors == null || monitors.limit() == 0) {
             return "Display " + monitorIndex;

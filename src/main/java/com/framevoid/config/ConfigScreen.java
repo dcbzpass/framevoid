@@ -2,7 +2,6 @@ package com.framevoid.config;
 
 import com.framevoid.window.MonitorDetector;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.CycleButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -25,18 +24,6 @@ public class ConfigScreen extends Screen {
         int startY = this.height / 4;
 
         this.addRenderableWidget(
-                CycleButton.onOffBuilder(config.isAutoApply())
-                        .withTooltip(value -> Tooltip.create(
-                                Component.translatable("framevoid.config.autoApply.tooltip")))
-                        .create(centerX - 100, startY, 200, 20,
-                                Component.translatable("framevoid.config.autoApply"),
-                                (button, value) -> {
-                                    config.setAutoApply(value);
-                                    config.save();
-                                })
-        );
-
-        this.addRenderableWidget(
                 Button.builder(
                                 buildMonitorLabel(),
                                 button -> {
@@ -45,7 +32,7 @@ public class ConfigScreen extends Screen {
                                     config.save();
                                     button.setMessage(buildMonitorLabel());
                                 })
-                        .bounds(centerX - 100, startY + 30, 200, 20)
+                        .bounds(centerX - 100, startY, 200, 20)
                         .tooltip(Tooltip.create(
                                 Component.translatable("framevoid.config.monitorIndex.tooltip")))
                         .build()
